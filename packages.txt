@@ -1,0 +1,7 @@
+curl
+make
+git
+ca-certificates
+grep
+rsync
+jq
