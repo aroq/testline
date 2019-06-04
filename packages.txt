@@ -5,3 +5,4 @@ ca-certificates
 grep
 rsync
 jq
+bash
