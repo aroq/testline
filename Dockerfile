@@ -1,4 +1,7 @@
-FROM loadimpact/k6
+FROM loadimpact/k6 as k6
+
+FROM golang:1-alpine
+COPY --from=k6 /go/bin/k6 /usr/bin/k6
 
 # Install alpine package manifest
 COPY packages.txt /etc/apk/
