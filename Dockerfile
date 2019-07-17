@@ -1,7 +1,18 @@
 FROM loadimpact/k6 as k6
 
-FROM golang:1-alpine
-COPY --from=k6 /go/bin/k6 /usr/bin/k6
+FROM golang:1-alpine as builder
+RUN apk add --update \
+    git
+RUN pwd && \
+  git clone https://github.com/aroq/variant.git && \
+  cd variant && \
+  git checkout unstable && \
+  go build && \
+  cp variant /usr/bin/
+
+FROM alpine:3.7
+COPY --from=k6 /usr/bin/k6 /usr/bin/k6
+COPY --from=builder /usr/bin/variant /usr/bin/variant
 
 # Install alpine package manifest
 COPY packages.txt /etc/apk/
@@ -16,6 +27,3 @@ RUN apk add --update $(grep -v '^#' /etc/apk/packages.txt)
     # && rm -f variant.tar.gz \
     # && rm -fR variant \
     # && chmod +x /usr/local/bin/variant
-
-# TODO: Need to copy the binary from Uniconf docker image.
-RUN go get github.com/aroq/variant@unstable
