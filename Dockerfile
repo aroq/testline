@@ -13,6 +13,5 @@ RUN curl --fail -sSL -o variant.tar.gz https://github.com/mumoshu/variant/releas
     && mkdir -p variant && \
     tar -zxf variant.tar.gz -C variant \
     && cp variant/variant /usr/local/bin/ \
-    && rm -f variant.tar.gz \
-    && rm -fR variant \
+    && rm -fR variant.tar.gz variant \
     && chmod +x /usr/local/bin/variant
