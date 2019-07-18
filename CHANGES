@@ -1,0 +1,13 @@
+Version 0.1.1:
+
+
+Version 0.1.0
+ - Update variant install command
+ - Fix k6 copy
+ - Update variant to 0.32.0
+ - Add go
+ - Set variant to be installed from http://github.com/aroq@unstable
+ - Add bash
+ - Initial commit
+ - Initial commit
+
