@@ -1,7 +1,11 @@
 FROM loadimpact/k6 as k6
+FROM mikefarah/yq as yq
 
 FROM golang:1-alpine
+
+# Copy binaries
 COPY --from=k6 /usr/bin/k6 /usr/bin/k6
+COPY --from=yq /usr/bin/yq /usr/bin/yq
 
 # Install alpine package manifest
 COPY packages.txt /etc/apk/
